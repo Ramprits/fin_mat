@@ -1,11 +1,16 @@
+<div *ngIf="isLoading;else homeTmp">
+    <app-loader [isLoading]="isLoading" message="{{message}}"></app-loader>
+</div>
 <div class="container">
-    <div class="row">
-        <div class="col-md-3 col-xs-6" *ngFor="let item of quote">
-            <div class="box">
-                <mat-card fxLayoutGap="20px" style="margin-top: 1rem;">
-                    {{item.name}}
-                </mat-card>
+    <ng-template #homeTmp>
+        <div class="row">
+            <div class="col-md-3 col-xs-6" *ngFor="let item of quote">
+                <div class="box">
+                    <mat-card fxLayoutGap="20px" style="margin-top: 1rem;">
+                        {{item.name}}
+                    </mat-card>
+                </div>
             </div>
         </div>
-    </div>
+    </ng-template>
 </div>

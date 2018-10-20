@@ -11,20 +11,24 @@ import { QuoteService } from './quote.service';
 export class HomeComponent implements OnInit {
   quote: any[];
   isLoading: boolean;
-
+  message = '';
   constructor(private quoteService: QuoteService) {}
 
   ngOnInit() {
-    this.isLoading = true;
-    this.quoteService
-      .getLoans()
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe((quote: any[]) => {
-        this.quote = quote;
-      });
+    setTimeout(() => {
+      this.isLoading = true;
+      this.message = 'Please wait while loading...';
+      this.quoteService
+        .getLoans()
+        .pipe(
+          finalize(() => {
+            this.message = 'Still loading...';
+            this.isLoading = false;
+          })
+        )
+        .subscribe((quote: any[]) => {
+          this.quote = quote;
+        });
+    }, 2000);
   }
 }
